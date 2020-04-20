@@ -1,5 +1,4 @@
 ### GUI (Graphical User Interface) of the Cross-Sell Tool
-#edits 0420
 
 import tkinter as tk
 from tkinter import filedialog
