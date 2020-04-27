@@ -120,9 +120,9 @@ class App:
         pdp = df[df['Entity']!='CHILDREN']
         for_pdp = df_filtered[df_filtered['Entity']!='CHILDREN']
         # Placeholder Cross-Sell
-        def reco(i, for_sc):
-            output = for_sc
-            if i in for_sc.index: output = for_sc.drop(i)
+        def reco(i, for_):
+            output = for_
+            if i in for_.index: output = for_.drop(i)
             p = random.sample(list(output.index), k=10)
             return p
         sc_recommendations = {i : reco(i, for_sc) for i in sc.index}
