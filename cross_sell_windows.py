@@ -85,7 +85,7 @@ class App:
 
     def clicked(self, frame_1):
         sku = self.entry1.get()
-        sku = pd.read_excel(sku, sheet_name='Master', header=1)
+        sku = pd.read_excel(sku, sheet_name='Master', header=1, engine='openpyxl')
         #sku = sku.dropna(axis=1, how='all')
         sku = sku.dropna(axis=0, how='all')
         inv = self.entry2.get()
@@ -93,7 +93,7 @@ class App:
         brand = str(inv.Brand[0])
         if brand == 'BAL': brand = 'BHUS'
         disallow = self.entry3.get()
-        disallow = pd.read_excel(disallow, header=0, usecols=[0])
+        disallow = pd.read_excel(disallow, header=0, usecols=[0], engine='openpyxl')
         sku = sku[sku['Product Code'].notna()] #remove rows with blank SKU
         sku['Product Code'] = sku['Product Code'].astype(str)
         #For products without Sub-Category, inherit its Category
@@ -214,7 +214,7 @@ class App:
                 light = df.loc[i, 'Light Type']
                 output.loc[output['Light Type']==collection, 'Score'] += 1
                 p = [] 
-                Rules = pd.read_excel(self.entryrules.get(), sheet_name='Rules')
+                Rules = pd.read_excel(self.entryrules.get(), sheet_name='Rules', engine='openpyxl')
                 Rules.drop(columns=['Available SKU Count', 'Category'], inplace=True) 
                 Rules.set_index(['Sub-Category'], inplace=True)
                 combs = []
@@ -333,7 +333,7 @@ class App:
                 self.frame_3.grid_forget()
                 self.frame_4 = tk.Frame(window, padx=10, pady=10)
                 self.frame_4.grid(column=0, row=0)
-                overrides = pd.read_excel(path.name, sheet_name='Override')
+                overrides = pd.read_excel(path.name, sheet_name='Override', engine='openpyxl')
                 overrides.dropna(axis=0, inplace=True)
                 overrides.iloc[:,:5] = overrides.iloc[:,:5].astype(dtype = int, errors = 'ignore')
                 overrode = results_code.set_index([results_code.index, 'Place']).sort_index()
